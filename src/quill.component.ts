@@ -1,6 +1,6 @@
-import {Component, ElementRef, OnInit, OnDestroy, Input} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import * as Quill from 'quill';
+import { Component, ElementRef, OnInit, OnDestroy, Input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import Quill from 'quill';
 
 
 @Component({
@@ -14,8 +14,7 @@ import * as Quill from 'quill';
 		},
 	],
 })
-export class QuillComponent implements OnInit, OnDestroy, ControlValueAccessor
-{
+export class QuillComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
 
 	@Input()
@@ -26,16 +25,15 @@ export class QuillComponent implements OnInit, OnDestroy, ControlValueAccessor
 
 	protected editor: Quill;
 
-	private defaultContents: any|undefined;
+	private defaultContents: any | undefined;
 
 
 	constructor(
 		private $el: ElementRef,
-	) {}
+	) { }
 
 
-	public ngOnInit(): void
-	{
+	public ngOnInit(): void {
 		const options = this.options || {};
 
 		if (typeof options.theme === 'undefined') {
@@ -58,13 +56,11 @@ export class QuillComponent implements OnInit, OnDestroy, ControlValueAccessor
 	}
 
 
-	public ngOnDestroy(): void
-	{
+	public ngOnDestroy(): void {
 	}
 
 
-	public writeValue(contents: any): void
-	{
+	public writeValue(contents: any): void {
 		if (this.editor) {
 			this.editor.setContents(contents);
 		} else {
@@ -73,20 +69,17 @@ export class QuillComponent implements OnInit, OnDestroy, ControlValueAccessor
 	}
 
 
-	public registerOnChange(fn: any): void
-	{
+	public registerOnChange(fn: any): void {
 		this.onChange = fn;
 	}
 
 
-	public registerOnTouched(fn: any): void
-	{
+	public registerOnTouched(fn: any): void {
 		this.onTouched = fn;
 	}
 
 
-	protected getValue(): any|undefined
-	{
+	protected getValue(): any | undefined {
 		if (!this.editor) {
 			return undefined;
 		}
@@ -101,8 +94,7 @@ export class QuillComponent implements OnInit, OnDestroy, ControlValueAccessor
 	}
 
 
-	protected isEmpty(contents: any): boolean
-	{
+	protected isEmpty(contents: any): boolean {
 		if (contents.ops.length > 1) {
 			return false;
 		}
@@ -125,9 +117,9 @@ export class QuillComponent implements OnInit, OnDestroy, ControlValueAccessor
 	}
 
 
-	protected onTouched = () => {};
+	protected onTouched = () => { };
 
 
-	private onChange = (_: any) => {};
+	private onChange = (_: any) => { };
 
 }
